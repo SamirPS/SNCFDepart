@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 
+#Code fortement inspiré de XavierDupré
 def requete(numero_page,token_auth):
     return requests.get(
         ('https://api.sncf.com/v1/coverage/sncf/stop_areas?start_page={}').format(numero_page),
