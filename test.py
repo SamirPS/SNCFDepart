@@ -24,13 +24,16 @@ for i in a.json()["departures"]:
 
     b=requests.get(url=f'https://api.sncf.com/v1/coverage/sncf/journeys?from=admin:fr:91174&to=admin:fr:{code.json()[0]["code"]}&datetime={convertir_en_chaine(now)}'
     ,headers={"Authorization":"cac438f6-f223-4802-b5eb-cf11ec8098c0"})
-    
-    session = b.json()['journeys'][0]['sections'][1]
-    rows = []
 
-    if "stop_date_times" in session:
-        for i in session['stop_date_times']:
-            rows.append(i['stop_point']['name'])
+    try:
+        session = b.json()['journeys'][0]['sections'][1]
+        rows = []
+
+        if "stop_date_times" in session:
+            for i in session['stop_date_times']:
+                rows.append(i['stop_point']['name'])
+    except KeyError:
+        pass
     
     
     print("\n")
